@@ -1,0 +1,104 @@
+﻿<Window x:Class="WPF_Assignment_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:s="clr-namespace:WPF_Assignment_1"
+        Title="MainWindow" Height="350" Width="525">
+    <DockPanel Name="mainDockPanel" LastChildFill="True">
+
+        <!-- Bygger en meny i topen av fönstret -->
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Left" 
+              Background="NavajoWhite" 
+              BorderBrush="Black">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" 
+                          MouseEnter="MouseEnterExitArea"
+                          Click="FileExit_CLick"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+        </Menu>
+
+        <!--StatusBar i botten av fönstret-->
+        <StatusBar DockPanel.Dock="Bottom" 
+                   Background="Coral"
+                   Height="40">
+            <StatusBarItem>
+                <TextBlock Name="statusBarText"
+                           Text="Ready"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Bygger Toolbar med shape knapparna -->
+        <ToolBar DockPanel.Dock="Top" HorizontalContentAlignment="Center" 
+                 Height="70">
+            <!-- Rektangel knappen -->
+            <RadioButton Name="btnRektangel" 
+                         GroupName="shapeSelection"
+                         BorderBrush="Black"
+                         BorderThickness="2"
+                         HorizontalAlignment="Left" Click="RectangleOption_Click">
+                <Grid>
+                    <Rectangle Fill="Red" 
+                               Height="30"/>
+
+                    <TextBlock Text="Rektangel"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </RadioButton>
+
+            <!-- Romb knappen -->
+            <RadioButton Name="btnRomb"
+                         GroupName="shapeSelection"
+                         BorderBrush="Black"
+                         BorderThickness="2"
+                         HorizontalAlignment="Left" Click="RombOption_Click">
+                <Grid>
+                    <Rectangle Fill="BlueViolet"
+                               Height="30"
+                               Width="30">
+                        <Rectangle.LayoutTransform>
+                            <RotateTransform Angle="-45"/>
+                        </Rectangle.LayoutTransform>
+                    </Rectangle>
+
+                    <TextBlock Text="Romb"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </RadioButton>
+            <RadioButton Name="btnLine"
+                         GroupName="shapeSelection"
+                         BorderBrush="Black"
+                         BorderThickness="2"
+                         HorizontalAlignment="Left" Click="LineOption_Click">
+                <Grid>
+                    <Line
+                        Fill="Black"
+                        Height="35"
+                        Width="35"
+                        StrokeThickness="10"
+                        Stroke="Blue"
+                        X1="10" Y1="10"
+                        X2="25" Y2="25"
+                        StrokeStartLineCap="Triangle"
+                        StrokeEndLineCap="Flat"></Line>
+                </Grid>
+            </RadioButton>
+            <Button Content="Clear canvas" 
+                    Click="Button_Click">
+
+            </Button>
+        </ToolBar>
+        
+        <!-- Canvasen! -->
+        <Canvas DockPanel.Dock="Left" 
+                ClipToBounds="True" 
+                Background="Yellow" 
+                MouseLeftButtonDown="Canvas_MouseLeftButtonDown" 
+                Name="canvasDrawingArea"/>
+    </DockPanel>
+</Window>
